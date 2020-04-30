@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Food Menu</title>
+    <link rel="stylesheet" href="edit_catering_food_menu.css">
+    <link rel="import" href="header.html">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <li name="lists"nk rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        body {
+            background: linear-gradient(70deg, #e6e6e6, #f7f7f7);
+            color: #514B64;
+            min-height: 100vh;
+        }
+
+        code {
+            background: #fff;
+            padding: 0.2rem;
+            border-radius: 0.2rem;
+            margin: 0 0.3rem;
+        }
+
+        .food_items {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+            text-justify: distribute;
+
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Darker background-color on hover */
+        .food_items:hover {
+            background: #ddd;
+        }
+
+        /* When clicked on, add a background color and strike out text */
+        .list_li.checked {
+            background:black;
+            color: #fff;
+        }
+
+        /* Add a "checked" mark when clicked on */
+        .food_items::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            top: 10px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 15px;
+            width: 7px;
+        }
+
+        /* Style the close button */
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 12px 16px 12px 16px;
+        }
+
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Style the header */
+        .header {
+            color: white;
+            text-align: center;
+        }
+
+        /* Clear floats after the header */
+        .header:after {
+            content: "";
+            display: table;
+            clear: left;
+        }
+
+        /* Style the input */
+        input {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            width: 73%;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+        }
+
+        /* Style the "Add" button */
+        .addBtn {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 25%;
+            background: #d9d9d9;
+            color: rgb(7, 7, 7);
+            float: right;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5;
+        }
+
+        .addBtn:hover {
+            background-color: #bbb;
+        }
+
+        .save_button {
+            float: right;
+        }
+
+        .vertical_line {
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        .ho_line {
+            border: 0;
+            height: 3px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(9, 84, 132), rgba(0, 0, 0, 0));
+        }
+    </style>
+    <script>
+        // Create a "close" button and append it to each list item
+        var myNodelist = document.querySelectorAll("li");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+        // Add a "checked" symbol when clicking on a list item
+        var list1 = document.getElementsByClassName("food_items");
+        // var list2 = document.getElementsByClassName("list_li2");
+        // var list3 = document.getElementsByClassName("list_li3");
+        // var list4 = document.getElementsByClassName("list_li4");
+        // var list5 = document.getElementsByClassName("list_li5");
+        // var list6 = document.getElementsByClassName("list_li6");
+        // var list7 = document.getElementsByClassName("list_li7");
+        // var list8 = document.getElementsByClassName("list_li8");
+        list1.addEventListener('click', function (ev) {
+            if (ev.target.className === 'food_items') {
+                ev.target.classList.toggle('checked');
+            }
+        }, true);
+        // list2.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li2') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // list3.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li3') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // list4.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li4') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // list5.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li5') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // list6.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li6') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // list7.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li7') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // list8.addEventListener('click', function (ev) {
+        //         if (ev.target.className === 'list_li8') {
+        //             ev.target.classList.toggle('checked');
+        //         }
+        //     }, false);
+        // Create a new list item when clicking on the "Add" button
+        function newElement(x) {
+            var li = document.createElement("li");
+            if (x == 1) {
+                var inputValue = document.getElementById("myInput1").value;
+            } else if (x == 2) {
+                var inputValue = document.getElementById("myInput2").value;
+            } else if (x == 3) {
+                var inputValue = document.getElementById("myInput3").value;
+            } else if (x == 4) {
+                var inputValue = document.getElementById("myInput4").value;
+            } else if (x == 5) {
+                var inputValue = document.getElementById("myInput5").value;
+            } else if (x == 6) {
+                var inputValue = document.getElementById("myInput6").value;
+            } else if (x == 7) {
+                var inputValue = document.getElementById("myInput7").value;
+            } else if (x == 8) {
+                var inputValue = document.getElementById("myInput8").value;
+            }
+            var t = document.createTextNode(inputValue);
+            li.className = "food_items";
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else if (x == 1) {
+                document.getElementById("myUL1").appendChild(li);
+            } else if (x == 2) {
+                document.getElementById("myUL2").appendChild(li);
+            } else if (x == 3) {
+                document.getElementById("myUL3").appendChild(li);
+            } else if (x == 4) {
+                document.getElementById("myUL4").appendChild(li);
+            } else if (x == 5) {
+                document.getElementById("myUL5").appendChild(li);
+            } else if (x == 6) {
+                document.getElementById("myUL6").appendChild(li);
+            } else if (x == 7) {
+                document.getElementById("myUL7").appendChild(li);
+            } else if (x == 8) {
+                document.getElementById("myUL8").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+        }
+    </script>
+    <!-- <link rel="import" href="header.html"> -->
+</head>
+
+<body>
+    <div>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <center>
+                            <h5>
+                                Dishes - Veg
+                            </h5>
+                        </center>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <center>
+                            <h5>
+                                Dishes - Non Veg
+                            </h5>
+                        </center>
+                    </td>
+                </tr>
+            </thead>
+            <tr>
+                <td colspan="4">
+                    <hr class="ho_line" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <h6>
+                            Morning - BreakFast
+                        </h6>
+                    </center>
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput1" placeholder="Recipe...">
+                        <span onclick="newElement(1)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL1" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li1">Idly</li>
+                            <li name="lists" class="food_items justify-content-center list_li1">Dosa</li>
+                            <li name="lists" class="food_items justify-content-center list_li1">Vada</li>
+                            <li name="lists" class="food_items justify-content-center list_li1">Puri</li>
+                            <li name="lists" class="food_items justify-content-center list_li1">Pongal</li>
+                            <li class="food_items justify-content-center list_li1">Sweet</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <img src="vertical_blue_line.png" alt="" height="25%" class="vertical_line">
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr class="ho_line" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <h6>
+                            Afternoon - Lunch
+                        </h6>
+                    </center>
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput2" placeholder="Recipe...">
+                        <span onclick="newElement(2)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL2" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li2">Samabar</li>
+                            <li name="lists" class="food_items justify-content-center list_li2">Vatha Kulambu</li>
+                            <li name="lists" class="food_items justify-content-center list_li2">Puriyal</li>
+                            <li name="lists" class="food_items justify-content-center list_li2">Side dish</li>
+                            <li name="lists" class="food_items justify-content-center list_li2">Rasam</li>
+                            <li name="lists" class="food_items justify-content-center list_li2">Moore</li>
+                            <li name="lists" class="food_items justify-content-center list_li2">Sweet</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <img src="vertical_blue_line.png" alt="" height="25%" class="vertical_line">
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput3" placeholder="Recipe...">
+                        <span onclick="newElement(3)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL3" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li3">Chicken Fry</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Fish Kulambu</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Kola Oranda</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Beef Gravy</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Mutton Fry</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Goat Brain</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Rasam</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Moore</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Sweet</li>
+                            <li name="lists" class="food_items justify-content-center list_li3">Ice Cream</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr class="ho_line" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <h6>
+                            Evening - Snacks
+                        </h6>
+                    </center>
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput4" placeholder="Recipe...">
+                        <span onclick="newElement(4)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL4" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li4">Popcorn</li>
+                            <li name="lists" class="food_items justify-content-center list_li4">Badam Milk</li>
+                            <li name="lists" class="food_items justify-content-center list_li4">Rosemilk</li>
+                            <li name="lists" class="food_items justify-content-center list_li4">Ice cream</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <img src="vertical_blue_line.png" alt="" height="25%" class="vertical_line">
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr class="ho_line" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <h6>
+                            Night - Dinner
+                        </h6>
+                    </center>
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput5" placeholder="Recipe...">
+                        <span onclick="newElement(5)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL5" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li5">Pulao</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Mushroom Briyani</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Chapathi</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Panner Butter Masala</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Parota</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Guruma</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Side dish</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Sweet</li>
+                            <li name="lists" class="food_items justify-content-center list_li5">Ice cream</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <img src="vertical_blue_line.png" alt="" height="25%" class="vertical_line">
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput6" placeholder="Recipe...">
+                        <span onclick="newElement(6)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL6" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li6">Chicken 65</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Mutton Briyani</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Beef gravy</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Beef Mince Meat</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Parota</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Chicken Guruma</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Chicken Tandoori</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Sweet</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Ice cream</li>
+                            <li name="lists" class="food_items justify-content-center list_li6">Beeda</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr class="ho_line" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <h6>
+                            Chef's Special
+                        </h6>
+                    </center>
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput7" placeholder="Recipe...">
+                        <span onclick="newElement(7)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL7" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li7">fsdlkjf</li>
+                            <li name="lists" class="food_items justify-content-center list_li7">fdgfgf</li>
+                            <li name="lists" class="food_items justify-content-center list_li7">sgdfgs</li>
+                            <li name="lists" class="food_items justify-content-center list_li7">gfhdhdg</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <img src="vertical_blue_line.png" alt="" height="25%" class="vertical_line">
+                </td>
+                <td>
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput8" placeholder="Recipe...">
+                        <span onclick="newElement(8)" class="addBtn">Add</span>
+                    </div>
+                    <div>
+                        <ul id="myUL8" class="list-group list">
+                            <li name="lists" class="food_items justify-content-center list_li8">fsdlkjf</li>
+                            <li name="lists" class="food_items justify-content-center list_li8">fdgfgf</li>
+                            <li name="lists" class="food_items justify-content-center list_li8">sgdfgs</li>
+                            <li name="lists" class="food_items justify-content-center list_li8">gfhdhdg</li>
+                        </ul>
+                    </div>
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                </td>
+                <td>
+                    <div class="save_button">
+                        <a href="catering_food_menu.html" class="btn btn-primary" role="button">Save</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+</body>
+<!-- <head>
+    <link rel="import" href="footer.html">
+</head> -->
+
+</html>
