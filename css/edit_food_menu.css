@@ -40,9 +40,9 @@ code {
 }
 
 /* When clicked on, add a background color and strike out text */
-.list_li.checked {
-  background: black;
-  color: #fff;
+.checked {
+  background-color: #bbb;
+  text-decoration: line-through;
 }
 
 /* Add a "checked" mark when clicked on */
