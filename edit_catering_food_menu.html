@@ -3,303 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catering Food Menu</title>
-    <link rel="stylesheet" href="edit_catering_food_menu.css" />
-    <link rel="import" href="header.html" />
+
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
     />
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <li
-      name="lists"
-      nk
+    <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    >
-      <style>
-        .clearfix:after {
-          content: '';
-          display: table;
-          clear: both;
-        }
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-        body {
-          background: linear-gradient(70deg, #e6e6e6, #f7f7f7);
-          color: #514b64;
-          min-height: 100vh;
-        }
+    <link rel="stylesheet" href="css/edit_food_menu.css" />
 
-        code {
-          background: #fff;
-          padding: 0.2rem;
-          border-radius: 0.2rem;
-          margin: 0 0.3rem;
-        }
+    <script src="js/edit_food_menu.js"></script>
 
-        .food_items {
-          cursor: pointer;
-          position: relative;
-          padding: 12px 8px 12px 40px;
-          list-style-type: none;
-          background: #eee;
-          font-size: 18px;
-          transition: 0.2s;
-          text-justify: distribute;
-
-          /* make the list items unselectable */
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-        }
-
-        /* Darker background-color on hover */
-        .food_items:hover {
-          background: #ddd;
-        }
-
-        /* When clicked on, add a background color and strike out text */
-        .list_li.checked {
-          background: black;
-          color: #fff;
-        }
-
-        /* Add a "checked" mark when clicked on */
-        .food_items::before {
-          content: '';
-          position: absolute;
-          border-color: #fff;
-          border-style: solid;
-          border-width: 0 2px 2px 0;
-          top: 10px;
-          left: 16px;
-          transform: rotate(45deg);
-          height: 15px;
-          width: 7px;
-        }
-
-        /* Style the close button */
-        .close {
-          position: absolute;
-          right: 0;
-          top: 0;
-          padding: 12px 16px 12px 16px;
-        }
-
-        .close:hover {
-          background-color: #f44336;
-          color: white;
-        }
-
-        /* Style the header */
-        .header {
-          color: white;
-          text-align: center;
-        }
-
-        /* Clear floats after the header */
-        .header:after {
-          content: '';
-          display: table;
-          clear: left;
-        }
-
-        /* Style the input */
-        input {
-          margin: 0;
-          border: none;
-          border-radius: 0;
-          width: 73%;
-          padding: 10px;
-          float: left;
-          font-size: 16px;
-        }
-
-        /* Style the "Add" button */
-        .addBtn {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          padding: 10px;
-          width: 25%;
-          background: #d9d9d9;
-          color: rgb(7, 7, 7);
-          float: right;
-          text-align: center;
-          font-size: 16px;
-          cursor: pointer;
-          transition: 0.3s;
-          border-radius: 5;
-        }
-
-        .addBtn:hover {
-          background-color: #bbb;
-        }
-
-        .save_button {
-          float: right;
-        }
-
-        .vertical_line {
-          padding-left: 25px;
-          padding-right: 25px;
-        }
-
-        .ho_line {
-          border: 0;
-          height: 3px;
-          background-image: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0),
-            rgba(9, 84, 132),
-            rgba(0, 0, 0, 0)
-          );
-        }
-      </style>
-      <script>
-        // Create a "close" button and append it to each list item
-        var myNodelist = document.querySelectorAll('li');
-        var i;
-        for (i = 0; i < myNodelist.length; i++) {
-          var span = document.createElement('SPAN');
-          var txt = document.createTextNode('\u00D7');
-          span.className = 'close';
-          span.appendChild(txt);
-          myNodelist[i].appendChild(span);
-        }
-
-        // Click on a close button to hide the current list item
-        var close = document.getElementsByClassName('close');
-        var i;
-        for (i = 0; i < close.length; i++) {
-          close[i].onclick = function () {
-            var div = this.parentElement;
-            div.style.display = 'none';
-          };
-        }
-
-        // Add a "checked" symbol when clicking on a list item
-        var list1 = document.getElementsByClassName('food_items');
-        // var list2 = document.getElementsByClassName("list_li2");
-        // var list3 = document.getElementsByClassName("list_li3");
-        // var list4 = document.getElementsByClassName("list_li4");
-        // var list5 = document.getElementsByClassName("list_li5");
-        // var list6 = document.getElementsByClassName("list_li6");
-        // var list7 = document.getElementsByClassName("list_li7");
-        // var list8 = document.getElementsByClassName("list_li8");
-        list1.addEventListener(
-          'click',
-          function (ev) {
-            if (ev.target.className === 'food_items') {
-              ev.target.classList.toggle('checked');
-            }
-          },
-          true
-        );
-        // list2.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li2') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // list3.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li3') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // list4.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li4') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // list5.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li5') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // list6.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li6') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // list7.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li7') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // list8.addEventListener('click', function (ev) {
-        //         if (ev.target.className === 'list_li8') {
-        //             ev.target.classList.toggle('checked');
-        //         }
-        //     }, false);
-        // Create a new list item when clicking on the "Add" button
-        function newElement(x) {
-          var li = document.createElement('li');
-          if (x == 1) {
-            var inputValue = document.getElementById('myInput1').value;
-          } else if (x == 2) {
-            var inputValue = document.getElementById('myInput2').value;
-          } else if (x == 3) {
-            var inputValue = document.getElementById('myInput3').value;
-          } else if (x == 4) {
-            var inputValue = document.getElementById('myInput4').value;
-          } else if (x == 5) {
-            var inputValue = document.getElementById('myInput5').value;
-          } else if (x == 6) {
-            var inputValue = document.getElementById('myInput6').value;
-          } else if (x == 7) {
-            var inputValue = document.getElementById('myInput7').value;
-          } else if (x == 8) {
-            var inputValue = document.getElementById('myInput8').value;
-          }
-          var t = document.createTextNode(inputValue);
-          li.className = 'food_items';
-          li.appendChild(t);
-          if (inputValue === '') {
-            alert('You must write something!');
-          } else if (x == 1) {
-            document.getElementById('myUL1').appendChild(li);
-          } else if (x == 2) {
-            document.getElementById('myUL2').appendChild(li);
-          } else if (x == 3) {
-            document.getElementById('myUL3').appendChild(li);
-          } else if (x == 4) {
-            document.getElementById('myUL4').appendChild(li);
-          } else if (x == 5) {
-            document.getElementById('myUL5').appendChild(li);
-          } else if (x == 6) {
-            document.getElementById('myUL6').appendChild(li);
-          } else if (x == 7) {
-            document.getElementById('myUL7').appendChild(li);
-          } else if (x == 8) {
-            document.getElementById('myUL8').appendChild(li);
-          }
-          document.getElementById('myInput').value = '';
-
-          var span = document.createElement('SPAN');
-          var txt = document.createTextNode('\u00D7');
-          span.className = 'close';
-          span.appendChild(txt);
-          li.appendChild(span);
-
-          for (i = 0; i < close.length; i++) {
-            close[i].onclick = function () {
-              var div = this.parentElement;
-              div.style.display = 'none';
-            };
-          }
-        }
-      </script>
-      <!-- <link rel="import" href="header.html"> -->
-    </li>
+    <title>Catering Food Menu</title>
   </head>
 
   <body>
@@ -858,5 +579,21 @@
         </tr>
       </table>
     </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
